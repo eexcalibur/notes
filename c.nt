@@ -1,0 +1,65 @@
+****************************************************************
+#
+#    Filename: c.nt
+#
+#    Author: zhangtao - slnazhangtao@163.com
+#    Description: 
+#    Input: 
+#    Output: 
+#    Create: 2019-09-22 21:01:36
+#    Last Modified: 2019-09-22 21:01:36
+
+****************************************************************
+
+!<zhangtao 2019-09-22 ------------------traceback
+
+
+#include <stdio.h>
+#include <execinfo.h>
+
+void print_trace ()
+{
+  void *array[10];
+  size_t size;
+  char **strings;
+  size_t i;
+
+  size = backtrace (array, 10);
+  strings = backtrace_symbols (array, size);
+
+  printf ("Obtained %zd stack frames.\n", size);
+
+  for (i = 0; i < size; i++)
+     printf ("%s\n", strings[i]);
+
+  free (strings);
+}
+
+void fun2()
+{
+    printf("fun2\n");
+	print_trace();
+}
+
+void fun1()
+{
+    printf("fun1\n");
+    fun2();
+}
+
+
+int main()
+{
+    printf("main\n");
+    fun1();
+    return 0;
+}
+
+ cc -rdynamic prog.c -o prog
+
+!>zhangtao 2019-09-22 ------------------
+
+!<zhangtao 2019-09-24 --------------debug
+printf ("[DEBUG:zhangtao] %s\t %s \t %d\n",__FILE__, __func__, __LINE__);
+!>zhangtao 2019-09-24 ------------------
+

@@ -1,0 +1,48 @@
+****************************************************************
+#
+#    Filename: notes/q.nt
+#
+#    Author: zhangtao - slnazhangtao@163.com
+#    Description: 
+#    Input: 
+#    Output: 
+#    Create: 2019-09-23 13:27:48
+#    Last Modified: 2019-09-23 13:27:48
+
+****************************************************************
+!<zhangtao 2019-09-23 ---------cori info
+
+2,388 Intel Xeon "Haswell" processor nodes 
+9,688 Intel Xeon Phi "Knight's Landing" nodes
+
+Category              Quantity    Description
+Haswell Cabinets        14         Each cabinet has 3 chassis; each chassis has 16 compute blades, each compute blade has 4 dual socket nodes
+Haswell Compute nodes   2,388      Each node has two sockets, each socket is populated with a 16-core Intel® Xeon™ Processor E5-2698 v3 ("Haswell") at 2.3 GHz
+                                   32 cores per node
+                                   Each core supports 2 hyper-threads, and has 2 256-bit-wide vector units
+                                   36.8 Gflops/core; 1.2 TFlops/node; 2.81 PFlops total (theoretical peak)
+                                   Each node has 128 GB DDR4 2133 MHz memory (four 16 GB DIMMs per socket); 298.5 TB total aggregate memory.
+                                   Each core has its own L1 and L2 caches, with 64 KB (32 KB instruction cache, 32 KB data) and 256 KB, respectively; there is also a 40-MB shared L3 cache per socket
+KNL Cabinets            54         Each cabinet has 3 chassis; each chassis has 16 compute blades, each compute blade has 4 nodes
+KNL Compute nodes       9,688      Each node is a single-socket Intel® Xeon Phi™ Processor 7250 ("Knights Landing") processor with 68 cores per node @ 1.4 GHz
+                                   Each core has two 512-bit-wide vector processing units. Each core has 4 hardware threads (272 threads total). Two cores form a tile. 
+                                   44.8 GFlops/core; 3 TFlops/node; 29.5 PFlops total (theoretical peak)
+                                   Each node has 96 GB DDR4 2400 MHz memory, six 16 GB DIMMs (102 GiB/s peak bandwidth). Total aggregate memory (combined with MCDRAM) is 1.09 PB.
+                                   Each node has 16 GB MCDRAM (multi-channel DRAM), > 460 GB/s peak bandwidth
+                                   Each core has its own L1 caches, with 64 KB (32 KiB instruction cache, 32 KB data). Each tile (2 cores) shares a 1MB L2 cache. 
+Interconnect                       Cray Aries with Dragonfly topology with 5.625 TB/s global bandwidth (Phase I).  45.0 TB/s global peak bidirectional bandwidth (Phase II).
+Login nodes              12        Dual socket (16 cores per socket, 32 total cores), 2.3 GHz Intel® Xeon™ Processor E5-2698 v3 ("Haswell") with 512 GB memory.
+MOM nodes                          -- There are no dedicated MOM nodes on Cori
+Shared Root Server Nodes 16   
+Lustre Router nodes      130  
+DVS Server Nodes         32   
+RSIP nodes               10   
+Scratch storage system             Cray Sonexion 2000 Lustre appliance. Scratch storage maximum aggregate bandwidth: > 700 GB/sec
+Burst Buffer                       Cray DataWarp system consisting of 288 Burst Buffer nodes, with maximum aggregate I/O >1.7 TB/s, and >28M IOP/sCategory Quantity    Description
+
+!>zhangtao 2019-09-23 ------------------
+
+
+
+salloc -N 2 -C knl -q debug -t 00:30:00 --account=m2136
+salloc -N 1 -C haswell -q interactive -t 01:00:00 account=m1759
